@@ -1,0 +1,29 @@
+.light {
+  .header-container {
+    background-color: var(--very-light-gray);
+    box-shadow: 10px 10px 10px lightgray;
+    h1 {
+      color: var(very-dark-blue-text);
+    }
+  }
+}
+.dark {
+  .header-container {
+    background-color: var(--very-dark-blue);
+    box-shadow: 5px 5px 10px black;
+    h1 {
+      color: var(--pure-white);
+    }
+  }
+}
+.header-container {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  h1 {
+    font-weight: 800;
+  }
+}

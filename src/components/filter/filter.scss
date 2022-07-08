@@ -1,0 +1,10 @@
+.filter-search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid red;
+  &__search {
+    width: 40%;
+    min-width: 350px;
+  }
+}

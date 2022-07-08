@@ -1,0 +1,24 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  gap: 10px;
+  cursor: pointer;
+  &-link {
+    background-color: transparent;
+    border: none !important;
+  }
+}
+.dark {
+  .btn {
+    border: 1px solid var(--pure-white);
+    color: var(--pure-white);
+  }
+}
+.light {
+  .btn {
+    border: 1px solid var(--dark-blue);
+    color: var(--very-dark-blue-text);
+  }
+}
