@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 const CountryCard = () => {
   return (
-    <VStack border="1px solid green" h="fit-content" w="300px" spacing="30px">
+    <VStack h="fit-content" w="300px" spacing="30px">
       <Image
         src="https://via.placeholder.com/150"
         fallbackSrc="https://via.placeholder.com/120"
