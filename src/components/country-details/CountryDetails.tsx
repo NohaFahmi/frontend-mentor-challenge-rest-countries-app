@@ -11,19 +11,23 @@ import {
   Tag,
 } from "@chakra-ui/react";
 import { BsArrowLeft } from "react-icons/bs";
+import {Link} from "react-router-dom";
 
 const CountryDetails = () => {
   return (
     <Box py="20">
-      <Button
-        leftIcon={<BsArrowLeft />}
-        variant="solid"
-        h="40px"
-        w="100px"
-        mb="10"
-      >
-        Back
-      </Button>
+      <Link to='/'>
+        <Button
+            leftIcon={<BsArrowLeft />}
+            variant="solid"
+            h="40px"
+            w="100px"
+            mb="10"
+        >
+          Back
+        </Button>
+      </Link>
+
       <HStack
         w="100%"
         maxH="350px"

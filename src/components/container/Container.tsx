@@ -1,11 +1,20 @@
 import "./container.scss";
 import Header from "../header/Header";
 import FilterSearch from "../filter/Filter";
-import { Container, useColorModeValue, Box, Flex } from "@chakra-ui/react";
-import CountryCard from "../country-card/CountryCard";
+import {
+  Container,
+  useColorModeValue,
+  Box,
+  Flex,
+  Switch,
+} from "@chakra-ui/react";
 import CountryDetails from "../country-details/CountryDetails";
-
-const AppContainer = () => {
+import { BrowserRouter, Route } from "react-router-dom";
+import {ReactNode} from "react";
+type AppContainerType = {
+  children: ReactNode
+}
+const AppContainer = ({children}: AppContainerType) => {
   return (
     <Box h="100%" w="100%" minH="100vh">
       <Header />
@@ -15,8 +24,7 @@ const AppContainer = () => {
         minH="100vh"
         bg={useColorModeValue("grayLight", "blueDark")}
       >
-        {/* <FilterSearch /> */}
-        <CountryDetails />
+        {children}
       </Container>
     </Box>
   );
