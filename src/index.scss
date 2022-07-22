@@ -8,14 +8,17 @@ html {
   margin: 0;
   box-sizing: border-box;
 }
+html {
+  height: 100%;
+}
 body {
   font-size: 14px;
   height: 100%;
   max-height: 100vh;
-  &.dark {
-    background-color: var(--very-dark-blue);
+  &.chakra-ui-dark {
+    background-color: var(--chakra-colors-blueDark);
   }
-  &.light {
-    background-color: var(--very-light-gray);
+  &.chakra-ui-light {
+    background-color: var(--chakra-colors-grayLight);
   }
 }

@@ -32,7 +32,7 @@ const Header = () => {
         >
           Where in the world?
         </Heading>
-        <Button onClick={toggleColorMode} bg="transparent">
+        <Button onClick={toggleColorMode} bg="transparent" display='flex' justifyContent='center' alignItems='center' gap='10px'>
           {colorMode === "light" && <BsMoonFill />}
           {colorMode === "dark" && <BsFillBrightnessHighFill />}
           {colorMode === "light" ? " Dark" : " Light"} Mode

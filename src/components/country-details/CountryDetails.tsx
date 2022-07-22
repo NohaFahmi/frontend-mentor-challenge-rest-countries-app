@@ -37,9 +37,8 @@ const CountryDetails = () => {
       })
     }
   }, [])
-    // @ts-ignore
   return (
-        <Box py="20">
+        <Box py="10" bg={useColorModeValue("grayLight", "blueDark")}>
           <Link to='/'>
             <Button
                 leftIcon={<BsArrowLeft />}
@@ -58,17 +57,17 @@ const CountryDetails = () => {
                   h="350px"
                   gap="10"
                   direction='row'
-                  justifyContent="center"
+                  justifyContent={{base: 'flex-start', md: 'center', lg: 'center'}}
                   alignItems="center"
                   wrap='wrap'
               >
                 <Image
                     src={country?.flags.svg}
-                    w="450px"
+                    w={{base: '100%', md: '100%', lg: '450px'}}
                     h="100%"
                     objectFit='fill'
                 />
-                <Box h="100%" w='50%'>
+                <Box h="100%" w={{base: '100%', md:'100%', lg:'50%'}}>
                   <Heading
                       as="h1"
                       size="lg"
@@ -81,7 +80,7 @@ const CountryDetails = () => {
                   >
                     {country.name}
                   </Heading>
-                  <Stack direction="row" spacing="10" mb="10">
+                  <Flex direction="row" gap="10" mb="10" wrap='wrap'>
                     <VStack spacing="3" alignItems='flex-start'>
                       <HStack>
                         <Heading
@@ -247,8 +246,8 @@ const CountryDetails = () => {
                         </Text>
                       </HStack>
                     </VStack>
-                  </Stack>
-                  <Flex flexWrap='wrap' gap='10px' direction='row'>
+                  </Flex>
+                  <Flex flexWrap='wrap' gap='10px' direction='row' pb='20'>
                     <Text
                         fontSize="sm"
                         color='bluDark'

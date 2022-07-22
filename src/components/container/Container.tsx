@@ -14,12 +14,10 @@ import {ReactNode} from "react";
 
 const AppContainer = ({children}: {children: ReactNode}) => {
   return (
-    <Box h="100%" w="100%" minH="100vh">
+    <Box w='100%' h='100%' bg={useColorModeValue("grayLight", "blueDark")}>
       <Header />
       <Container
         maxW="100%"
-        h="100%"
-        minH="100vh"
         bg={useColorModeValue("grayLight", "blueDark")}
       >
         {children}
