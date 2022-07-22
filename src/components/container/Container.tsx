@@ -11,10 +11,8 @@ import {
 import CountryDetails from "../country-details/CountryDetails";
 import { BrowserRouter, Route } from "react-router-dom";
 import {ReactNode} from "react";
-type AppContainerType = {
-  children: ReactNode
-}
-const AppContainer = ({children}: AppContainerType) => {
+
+const AppContainer = ({children}: {children: ReactNode}) => {
   return (
     <Box h="100%" w="100%" minH="100vh">
       <Header />
