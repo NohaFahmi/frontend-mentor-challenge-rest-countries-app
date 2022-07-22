@@ -43,7 +43,7 @@ const CountryDetails = () => {
       })
     }
   }, [])
-  if(!isLoading && country) {
+
     return <Box py="10" bg='grayLight' _dark={{bg: 'blueDark'}}>
       <Link to='/'>
         <Button
@@ -55,8 +55,15 @@ const CountryDetails = () => {
           Back
         </Button>
       </Link>
-      {
-          country &&
+      {isLoading && <HStack justifyContent='center' mt='20'>
+        <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='red.200'
+            color='red.500'
+            size='xl'/>
+      </HStack>}
+      {!isLoading && country &&
           <Flex
               w="100%"
               maxH="350px"
@@ -68,12 +75,12 @@ const CountryDetails = () => {
               wrap='wrap'
           >
             <Image
-                src={country?.flags.svg}
+                src={country.flags.svg}
                 w={{base: '100%', md: '100%', lg: '450px'}}
                 h="100%"
                 objectFit='fill'
             />
-            <Box h="100%" w={{base: '100%', md:'100%', lg:'50%'}}>
+            <Box h="100%" w={{base: '100%', md: '100%', lg: '50%'}}>
               <Heading
                   as="h1"
                   size="lg"
@@ -225,7 +232,7 @@ const CountryDetails = () => {
                         color='grayDark'
                         fontWeight="600">
                       {country.currencies.map((curr, index) => {
-                        return index === country.currencies.length-1 ? curr.name : curr.name
+                        return index === country.currencies.length - 1 ? curr.name : curr.name
                       })}
                     </Text>
                   </HStack>
@@ -236,7 +243,7 @@ const CountryDetails = () => {
                         size="sm"
                         noOfLines={1}
                         color='bluDark'
-                        _dark = {{color: 'grayLight'}}
+                        _dark={{color: 'grayLight'}}
                         fontWeight="600"
                     >
                       Languages:
@@ -247,7 +254,7 @@ const CountryDetails = () => {
                         fontWeight="600"
                     >
                       {country.languages.map((lang, index) => {
-                        return index === country.languages.length-1 ? lang.name : lang.name
+                        return index === country.languages.length - 1 ? lang.name : lang.name
                       })}
                     </Text>
                   </HStack>
@@ -257,31 +264,21 @@ const CountryDetails = () => {
                 <Text
                     fontSize="sm"
                     color='bluDark'
-                    _dark = {{color: 'grayLight'}}
+                    _dark={{color: 'grayLight'}}
                     fontWeight="600"
                 >
                   Border Countries:
                 </Text>
 
                 {country.borders && borderCountries.map((border) =>
-                    <CountryBorder border={border} key={border.name} />
+                    <CountryBorder border={border} key={border.name}/>
                 )}
               </Flex>
             </Box>
           </Flex>
       }
-
     </Box>
-  } else {
-    return <HStack justifyContent='center' mt='20'>
-      <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='red.200'
-          color='red.500'
-          size='xl'/>
-    </HStack>
-  }
+
 
 };
 export default CountryDetails;
