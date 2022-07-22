@@ -21,17 +21,24 @@ const CountryDetails = () => {
   const countryCode = useParams()['code'];
   const [country, setCountry] = useState<ICountry>();
   const [borderCountries, setBorderCountries] = useState<{name: string}[]>([]);
+
   useEffect(() => {
     if(countryCode) {
       CountriesService().getCountryByCode(countryCode).then((country) => {
-        setCountry(country);
-        CountriesService().getCountryBorders(country.borders).then((borders) => {
-          setBorderCountries(borders);
-        })
+        if(country.borders) {
+          CountriesService().getCountryBorders(country.borders).then((borders) => {
+            setCountry(country);
+            setBorderCountries(borders);
+          })
+        } else {
+          setCountry(country);
+        }
+
       })
     }
   }, [])
-    return (
+    // @ts-ignore
+  return (
         <Box py="20">
           <Link to='/'>
             <Button
@@ -39,215 +46,226 @@ const CountryDetails = () => {
                 variant="solid"
                 h="40px"
                 w="100px"
-                mb="10"
-            >
+                mb="10">
               Back
             </Button>
           </Link>
-
-          <Flex
-              w="100%"
-              maxH="350px"
-              h="350px"
-              gap="10"
-              direction='row'
-              justifyContent="center"
-              alignItems="center"
-              wrap='wrap'
-          >
-            <Image
-                src={country?.flags.svg}
-                w="450px"
-                h="100%"
-                objectFit='contain'
-            />
-            <Box h="100%" w='50%'>
-              <Heading
-                  as="h1"
-                  size="lg"
-                  noOfLines={1}
-                  color={useColorModeValue("blueDarker", "#fff")}
-                  fontWeight="800"
-                  mt="5"
-                  mb="5"
+          {
+            country &&
+              <Flex
+                  w="100%"
+                  maxH="350px"
+                  h="350px"
+                  gap="10"
+                  direction='row'
+                  justifyContent="center"
+                  alignItems="center"
+                  wrap='wrap'
               >
-                {country?.name}
-              </Heading>
-              <Stack direction="row" spacing="10" mb="10">
-                <VStack spacing="3" alignItems='flex-start'>
-                  <HStack>
-                    <Heading
-                        as="h6"
-                        size="sm"
-                        noOfLines={1}
-                        color={useColorModeValue("bluDark", "grayLight")}
-                        fontWeight="600"
-                    >
-                      Native Name:
-                    </Heading>
+                <Image
+                    src={country?.flags.svg}
+                    w="450px"
+                    h="100%"
+                    objectFit='fill'
+                />
+                <Box h="100%" w='50%'>
+                  <Heading
+                      as="h1"
+                      size="lg"
+                      noOfLines={1}
+                      color='blueDarker'
+                      _dark={{color: '#fff'}}
+                      fontWeight="800"
+                      mt="5"
+                      mb="5"
+                  >
+                    {country.name}
+                  </Heading>
+                  <Stack direction="row" spacing="10" mb="10">
+                    <VStack spacing="3" alignItems='flex-start'>
+                      <HStack>
+                        <Heading
+                            as="h6"
+                            size="sm"
+                            noOfLines={1}
+                            color='bluDark'
+                            _dark={{color: 'grayLight'}}
+                            fontWeight="600"
+                        >
+                          Native name
+                        </Heading>
+                        <Text
+                            fontSize="sm"
+                            color='grayDark'
+                            fontWeight="600"
+                        >
+                          {country.nativeName}
+                        </Text>
+                      </HStack>
+                      <HStack>
+                        <Heading
+                            as="h6"
+                            size="sm"
+                            noOfLines={1}
+                            color='bluDark'
+                            _dark={{color: 'grayLight'}}
+                            fontWeight="600"
+                        >
+                          Population:
+                        </Heading>
+                        <Text
+                            fontSize="sm"
+                            color='grayDark'
+                            fontWeight="600"
+                        >
+                          {country.population}
+                        </Text>
+                      </HStack>
+
+                      <HStack>
+                        <Heading
+                            as="h6"
+                            size="sm"
+                            noOfLines={1}
+                            color='bluDark'
+                            _dark={{color: 'grayLight'}}
+                            fontWeight="600"
+                        >
+                          Region:
+                        </Heading>
+                        <Text
+                            fontSize="sm"
+                            color='grayDark'
+                            fontWeight="600"
+                        >
+                          {country.region}
+                        </Text>
+                      </HStack>
+
+                      <HStack>
+                        <Heading
+                            as="h6"
+                            size="sm"
+                            noOfLines={1}
+                            color='bluDark'
+                            _dark={{color: 'grayLight'}}
+                            fontWeight="600"
+                        >
+                          Sub Region:
+                        </Heading>
+                        <Text
+                            fontSize="sm"
+                            color='grayDark'
+                            fontWeight="600"
+                        >
+                          {country.subregion}
+                        </Text>
+                      </HStack>
+
+                      <HStack>
+                        <Heading
+                            as="h6"
+                            size="sm"
+                            noOfLines={1}
+                            color='bluDark'
+                            _dark={{color: 'grayLight'}}
+                            fontWeight="600"
+                        >
+                          Capital:
+                        </Heading>
+                        <Text
+                            fontSize="sm"
+                            color='grayDark'
+                            fontWeight="600"
+                        >
+                          {country.capital}
+                        </Text>
+                      </HStack>
+                    </VStack>
+
+                    <VStack spacing="3" alignItems='flex-start'>
+                      <HStack>
+                        <Heading
+                            as="h6"
+                            size="sm"
+                            noOfLines={1}
+                            color='bluDark'
+                            _dark={{color: 'grayLight'}}
+                            fontWeight="600"
+                        >
+                          Top Level Domain:
+                        </Heading>
+                        <Text
+                            fontSize="sm"
+                            color='grayDark'
+                            fontWeight="600"
+                        >
+                          {country.topLevelDomain}
+                        </Text>
+                      </HStack>
+
+                      <HStack>
+                        <Heading
+                            as="h6"
+                            size="sm"
+                            noOfLines={1}
+                            color='bluDark'
+                            _dark={{color: 'grayLight'}}
+                            fontWeight="600"
+                        >
+                          Currencies:
+                        </Heading>
+                        <Text
+                            fontSize="sm"
+                            color='grayDark'
+                            fontWeight="600">
+                          {country.currencies.map((curr, index) => {
+                            return index === country.currencies.length-1 ? curr.name : curr.name
+                          })}
+                        </Text>
+                      </HStack>
+
+                      <HStack>
+                        <Heading
+                            as="h6"
+                            size="sm"
+                            noOfLines={1}
+                            color='bluDark'
+                            _dark = {{color: 'grayLight'}}
+                            fontWeight="600"
+                        >
+                          Languages:
+                        </Heading>
+                        <Text
+                            fontSize="sm"
+                            color='grayDark'
+                            fontWeight="600"
+                        >
+                          {country.languages.map((lang, index) => {
+                            return index === country.languages.length-1 ? lang.name : lang.name
+                          })}
+                        </Text>
+                      </HStack>
+                    </VStack>
+                  </Stack>
+                  <Flex flexWrap='wrap' gap='10px' direction='row'>
                     <Text
                         fontSize="sm"
-                        color={useColorModeValue("grayDark", "grayDark")}
+                        color='bluDark'
+                        _dark = {{color: 'grayLight'}}
                         fontWeight="600"
                     >
-                      {country?.nativeName}
+                      Border Countries:
                     </Text>
-                  </HStack>
 
-                  <HStack>
-                    <Heading
-                        as="h6"
-                        size="sm"
-                        noOfLines={1}
-                        color={useColorModeValue("bluDark", "grayLight")}
-                        fontWeight="600"
-                    >
-                      Population:
-                    </Heading>
-                    <Text
-                        fontSize="sm"
-                        color={useColorModeValue("grayDark", "grayDark")}
-                        fontWeight="600"
-                    >
-                      {country?.population}
-                    </Text>
-                  </HStack>
-
-                  <HStack>
-                    <Heading
-                        as="h6"
-                        size="sm"
-                        noOfLines={1}
-                        color={useColorModeValue("bluDark", "grayLight")}
-                        fontWeight="600"
-                    >
-                      Region:
-                    </Heading>
-                    <Text
-                        fontSize="sm"
-                        color={useColorModeValue("grayDark", "grayDark")}
-                        fontWeight="600"
-                    >
-                      {country?.region}
-                    </Text>
-                  </HStack>
-
-                  <HStack>
-                    <Heading
-                        as="h6"
-                        size="sm"
-                        noOfLines={1}
-                        color={useColorModeValue("bluDark", "grayLight")}
-                        fontWeight="600"
-                    >
-                      Sub Region:
-                    </Heading>
-                    <Text
-                        fontSize="sm"
-                        color={useColorModeValue("grayDark", "grayDark")}
-                        fontWeight="600"
-                    >
-                      {country?.subregion}
-                    </Text>
-                  </HStack>
-
-                  <HStack>
-                    <Heading
-                        as="h6"
-                        size="sm"
-                        noOfLines={1}
-                        color={useColorModeValue("bluDark", "grayLight")}
-                        fontWeight="600"
-                    >
-                      Capital:
-                    </Heading>
-                    <Text
-                        fontSize="sm"
-                        color={useColorModeValue("grayDark", "grayDark")}
-                        fontWeight="600"
-                    >
-                      {country?.capital}
-                    </Text>
-                  </HStack>
-                </VStack>
-
-                <VStack spacing="3" alignItems='flex-start'>
-                  <HStack>
-                    <Heading
-                        as="h6"
-                        size="sm"
-                        noOfLines={1}
-                        color={useColorModeValue("bluDark", "grayLight")}
-                        fontWeight="600"
-                    >
-                      Top Level Domain:
-                    </Heading>
-                    <Text
-                        fontSize="sm"
-                        color={useColorModeValue("grayDark", "grayDark")}
-                        fontWeight="600"
-                    >
-                      {country?.topLevelDomain}
-                    </Text>
-                  </HStack>
-
-                  <HStack>
-                    <Heading
-                        as="h6"
-                        size="sm"
-                        noOfLines={1}
-                        color={useColorModeValue("bluDark", "grayLight")}
-                        fontWeight="600"
-                    >
-                      Currencies:
-                    </Heading>
-                    <Text
-                        fontSize="sm"
-                        color={useColorModeValue("grayDark", "grayDark")}
-                        fontWeight="600">
-                      {country?.currencies.map((curr, index) => {
-                        return index === country.currencies.length-1 ? curr.name : curr.name
-                      })}
-                    </Text>
-                  </HStack>
-
-                  <HStack>
-                    <Heading
-                        as="h6"
-                        size="sm"
-                        noOfLines={1}
-                        color={useColorModeValue("bluDark", "grayLight")}
-                        fontWeight="600"
-                    >
-                      Languages:
-                    </Heading>
-                    <Text
-                        fontSize="sm"
-                        color={useColorModeValue("grayDark", "grayDark")}
-                        fontWeight="600"
-                    >
-                      {country?.languages.map((lang, index) => {
-                        return index === country.languages.length-1 ? lang.name : lang.name
-                      })}
-                    </Text>
-                  </HStack>
-                </VStack>
-              </Stack>
-              <Flex flexWrap='wrap' gap='10px' direction='row'>
-                <Text
-                    fontSize="sm"
-                    color={useColorModeValue("bluDark", "grayLight")}
-                    fontWeight="600"
-                >
-                  Border Countries:
-                </Text>
-
-                {borderCountries.map((border) =>
-                  <CountryBorder border={border} key={border.name} />
-                )}
+                    {country.borders && borderCountries.map((border) =>
+                        <CountryBorder border={border} key={border.name} />
+                    )}
+                  </Flex>
+                </Box>
               </Flex>
-            </Box>
-          </Flex>
+          }
+
         </Box>
     );
 };
