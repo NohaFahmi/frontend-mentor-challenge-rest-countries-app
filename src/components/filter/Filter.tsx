@@ -15,8 +15,14 @@ import {
 import { FiChevronDown } from "react-icons/fi";
 import { AiOutlineSearch } from "react-icons/ai";
 import "./filter.scss";
-const FilterSearch = () => {
+import {useEffect, useState} from "react";
+const FilterSearch = ({onSearch, onFilter}: {onSearch: (searchKeyword: string) => void, onFilter: (region: string) => void}) => {
   const menuIcon = <Icon as={FiChevronDown} />;
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const [selectedRegion, setSelectedRegion] = useState<string>('');
+  useEffect(() => {
+    onSearch(searchKeyword)
+  }, [searchKeyword])
   return (
     <Flex
       alignItems="center"
@@ -37,6 +43,10 @@ const FilterSearch = () => {
             bg={useColorModeValue("#fff", "blueLight")}
             border="none"
             _placeholder={{ color: "white" }}
+            value={searchKeyword}
+            onChange={ (e) => {
+              setSearchKeyword(e.target.value)
+            }}
           />
         </InputGroup>
       </Box>
@@ -59,14 +69,33 @@ const FilterSearch = () => {
               )}`,
             }}
           >
-            Filter by Region
+            {selectedRegion ? selectedRegion : 'Filter by Region'}
           </MenuButton>
           <MenuList border="none" bg={useColorModeValue("#fff", "blueLight")}>
-            <MenuItem>Download</MenuItem>
-            <MenuItem>Create a Copy</MenuItem>
-            <MenuItem>Mark as Draft</MenuItem>
-            <MenuItem>Delete</MenuItem>
-            <MenuItem>Attend a Workshop</MenuItem>
+            <MenuItem onClick={() => {
+              onFilter('all');
+              setSelectedRegion('')
+            }}>All</MenuItem>
+            <MenuItem onClick={() => {
+              onFilter('africa');
+              setSelectedRegion('Africa');
+            }}>Africa</MenuItem>
+            <MenuItem onClick={() => {
+                onFilter('americas')
+              setSelectedRegion('Americas');
+            }}>Americas</MenuItem>
+            <MenuItem onClick={() => {
+              onFilter('asia');
+              setSelectedRegion('Asia');
+            }}>Asia</MenuItem>
+            <MenuItem onClick={() => {
+              onFilter('europe');
+              setSelectedRegion('Europe')
+            }}>Europe</MenuItem>
+            <MenuItem onClick={() => {
+              onFilter('oceania');
+              setSelectedRegion('Oceania')
+            }}>Oceania</MenuItem>
           </MenuList>
         </Menu>
       </Box>

@@ -25,6 +25,20 @@ export const CountriesService = () => {
                 .then((countries) => {
                     return countries;
                 })
+        },
+        filterCountriesByName: (name: string):Promise<ICountry[]> => {
+            return fetch(`https://restcountries.com/v2/name/${name}`)
+                .then((res) => res.json())
+                .then((countries)=>{
+                return countries;
+            })
+        },
+        getCountriesInRegion: (region: string): Promise<ICountry[]> => {
+            return fetch(`https://restcountries.com/v2/region/${region}`)
+                .then((res) => res.json())
+                .then((countries) => {
+                    return countries;
+                })
         }
     }
 }
