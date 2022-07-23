@@ -20,7 +20,7 @@ import CountryBorder from "../countryBorder/CountryBorder";
 const CountryDetails = () => {
   const countryCode = useParams()['code'];
   const [country, setCountry] = useState<ICountry>();
-  const [borderCountries, setBorderCountries] = useState<{name: string}[]>([]);
+  const [borderCountries, setBorderCountries] = useState<{name: string, alpha2Code: string}[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const CountryDetails = () => {
         setIsLoading(false);
       })
     }
-  }, [])
+  }, [countryCode])
 
     return <Box py="10" bg='grayLight' _dark={{bg: 'blueDark'}}>
       <Link to='/'>

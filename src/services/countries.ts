@@ -18,9 +18,9 @@ export const CountriesService = () => {
                     return country;
                 });
         },
-        getCountryBorders: (codes: string[]):Promise<{name: string}[]> => {
+        getCountryBorders: (codes: string[]):Promise<{name: string, alpha2Code:string}[]> => {
             return fetch(
-                `https://restcountries.com/v2/alpha?codes=${codes}&fields=name`)
+                `https://restcountries.com/v2/alpha?codes=${codes}&fields=name,alpha2Code`)
                 .then((res) => res.json())
                 .then((countries) => {
                     return countries;
