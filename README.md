@@ -26,13 +26,13 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./screenshot.png)
 
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Rest-Countries-app's solution on Frontend Mentor](https://www.frontendmentor.io/solutions/rest-countries-app-with-theme-switcher-using-reactjs-and-chakra-sBDbsVx6Ty)
+- Live Site URL: [Rest-Countries-app](https://frontend-mentor-challenge-rest-countries-app.vercel.app/)
 
 ### Built with
 
